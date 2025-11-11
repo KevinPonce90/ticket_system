@@ -18,17 +18,22 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input): User
     {
-        Validator::make($input, [
+    $validator = Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => [
                 'required',
                 'string',
                 'email',
                 'max:255',
+                'regex:/^[A-Za-z0-9._%+-]+@jalisco\.gob\.mx$/i',
                 Rule::unique(User::class),
             ],
             'password' => $this->passwordRules(),
-        ])->validate();
+        ], [
+            'email.regex' => 'Solo se permiten correos del dominio @jalisco.gob.mx',
+        ]);
+
+        $validator->validate();
 
         return User::create([
             'name' => $input['name'],

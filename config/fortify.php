@@ -73,7 +73,10 @@ return [
     |
     */
 
-    'home' => '/dashboard',
+    // Redirigir a la página de tickets después de login/registro.
+    // Si prefieres no tocar esto (por ejemplo porque las pruebas esperan '/dashboard'),
+    // usa en su lugar una implementación personalizada de LoginResponse.
+    'home' => '/tickets',
 
     /*
     |--------------------------------------------------------------------------

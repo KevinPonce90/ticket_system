@@ -19,9 +19,12 @@ interface UserMenuContentProps {
 export function UserMenuContent({ user }: UserMenuContentProps) {
     const cleanup = useMobileNavigation();
 
-    const handleLogout = () => {
+    const handleLogout = (e?: React.MouseEvent) => {
+        e?.preventDefault();
+        // Close mobile navigation / menu first
         cleanup();
-        router.flushAll();
+        // Use Inertia router to send a POST request to the logout route (Laravel expects POST)
+        router.post(logout());
     };
 
     return (
@@ -42,7 +45,7 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
                         onClick={cleanup}
                     >
                         <Settings className="mr-2" />
-                        Settings
+                        Opciones de Perfil
                     </Link>
                 </DropdownMenuItem>
             </DropdownMenuGroup>
@@ -56,7 +59,7 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
                     data-test="logout-button"
                 >
                     <LogOut className="mr-2" />
-                    Log out
+                    Cerrar sesión
                 </Link>
             </DropdownMenuItem>
         </>
