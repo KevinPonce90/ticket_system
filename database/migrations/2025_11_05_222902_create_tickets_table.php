@@ -12,18 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tickets', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->timestamps();
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('noPesa');
             $table->string('codeAsset');
             $table->string('typeService');
-            $table->smallInteger('status')->default(0);
-            $table->unsignedBigInteger('area_id');  
-            $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('assigned_to')->nullable();
+            $table->foreign('assigned_to')->references('id')->on('users')->onDelete('set null');
+            $table->unsignedBigInteger('status_id');
+            $table->foreign('status_id')->references('id')->on('cat_statuses');
+            $table->unsignedBigInteger('priority_id');
+            $table->foreign('priority_id')->references('id')->on('cat_priorities');
         });
     }
 

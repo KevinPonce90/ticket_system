@@ -28,7 +28,7 @@ export function TicketsCreate() {
             <SheetTrigger asChild>
                 <Button variant="outline">Crear Ticket</Button>
             </SheetTrigger>
-            <SheetContent className="overflow-y-auto w-[400px]">
+            <SheetContent className="w-[400px] overflow-y-auto">
                 <SheetHeader>
                     <SheetTitle className="text-xl">Crear Ticket</SheetTitle>
                     <SheetDescription className="text-lg">
